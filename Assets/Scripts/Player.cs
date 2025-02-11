@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     }
 
     private void MovePlayer(Vector2 direction){
-        Vector3 moveDirection = new(direction.y, 0f, direction.x);
+        Vector3 moveDirection = new(direction.x, 0f, direction.y);
         rb.AddForce(speed * moveDirection);
     }
 
