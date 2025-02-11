@@ -8,15 +8,18 @@ public class gutter : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider triggeredBody){
+    private void OnTriggerEnter(Collider triggeredBody)
+    {
+        if (triggeredBody.CompareTag("ball"))
+        {
+            Rigidbody ballRigidBody = triggeredBody.GetComponent<Rigidbody>();
+            float velocityMagnitude = ballRigidBody.linearVelocity.magnitude;
 
-        Rigidbody ballRigidBody = triggeredBody.GetComponent<Rigidbody>();
-        float velocityMagnitude = ballRigidBody.linearVelocity.magnitude;
+            ballRigidBody.linearVelocity = Vector3.zero;
+            ballRigidBody.angularVelocity = Vector3.zero;
 
-        ballRigidBody.linearVelocity = Vector3.zero;
-        ballRigidBody.angularVelocity = Vector3.zero;
-
-        ballRigidBody.AddForce(transform.forward * velocityMagnitude, ForceMode.VelocityChange);
+            ballRigidBody.AddForce(transform.forward * velocityMagnitude, ForceMode.VelocityChange);
+        }
     }
 
     // Update is called once per frame
